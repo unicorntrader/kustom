@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAYSUNDO — Curated Retreat Experiences</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --clay: #C4A882;
+    --forest: #2D3A2E;
+    --sage: #7A8C6E;
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --charcoal: #1C1C1A;
+    --dust: #E8DFD0;
+    --terracotta: #B86840;
+    --mist: #D4CFC7;
+    --gold: #B89B5E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--dust);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .nav-links a {
+    color: var(--charcoal);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a.active { opacity: 1; border-bottom: 1px solid var(--forest); padding-bottom: 2px; }
+
+  .nav-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-ghost {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--charcoal);
+    background: transparent;
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-ghost:hover { background: var(--charcoal); color: var(--warm-white); }
+
+  .btn-solid {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    background: var(--forest);
+    color: var(--cream);
+    border: 1px solid var(--forest);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-solid:hover { background: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 3rem 6rem 4rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--forest);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    opacity: 0.65;
+    max-width: 400px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 1rem 2.5rem;
+    background: var(--forest);
+    color: var(--cream);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--terracotta); transform: translateY(-1px); }
+
+  .btn-outline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: var(--forest);
+    border: 1px solid var(--forest);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--forest); color: var(--cream); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--dust);
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--forest);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.5;
+    margin-top: 0.3rem;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+    gap: 4px;
+  }
+
+  .hero-img {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-img:first-child {
+    grid-row: 1 / 3;
+  }
+
+  .hero-img-inner {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+  }
+  .hero-img:hover .hero-img-inner { transform: scale(1.04); }
+
+  .img-forest { background-color: #3D4F35; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 12px); }
+  .img-mountain { background-color: #5C7A8A; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 10px); }
+  .img-lake { background-color: #4A6B5C; background-image: repeating-linear-gradient(30deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 14px); }
+  .img-desert { background-color: #C4906A; background-image: repeating-linear-gradient(-30deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 11px); }
+
+  .hero-img-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(250, 247, 242, 0.92);
+    padding: 0.3rem 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 500;
+  }
+
+  /* ─── SEARCH BAR ─── */
+  .search-section {
+    background: var(--forest);
+    padding: 2.5rem 4rem;
+  }
+
+  .search-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .search-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .search-bar {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .search-field {
+    padding: 1.1rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+  .search-field:last-child { border-right: none; }
+  .search-field label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  .search-field select, .search-field input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    width: 100%;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  .search-field select option { background: var(--forest); color: var(--cream); }
+
+  .search-btn {
+    padding: 1.1rem 2rem;
+    background: var(--terracotta);
+    border: none;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.25s;
+    white-space: nowrap;
+  }
+  .search-btn:hover { background: var(--clay); }
+
+  /* ─── FILTER CHIPS ─── */
+  .filter-section {
+    padding: 1.5rem 4rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--dust);
+    overflow-x: auto;
+  }
+
+  .filter-chips {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    min-width: max-content;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .filter-chip {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--mist);
+    background: white;
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .filter-chip:hover, .filter-chip.active {
+    background: var(--forest);
+    color: var(--cream);
+    border-color: var(--forest);
+  }
+
+  .filter-divider {
+    width: 1px;
+    height: 1.5rem;
+    background: var(--mist);
+    margin: 0 0.3rem;
+  }
+
+  /* ─── LISTING GRID ─── */
+  .listings-section {
+    padding: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--forest);
+    line-height: 1.1;
+  }
+  .section-title span { font-style: italic; color: var(--terracotta); }
+
+  .section-count {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.5;
+    font-weight: 500;
+  }
+
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* ─── RETREAT CARD ─── */
+  .retreat-card {
+    background: white;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .retreat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(45, 58, 46, 0.12);
+  }
+
+  .card-image {
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-img-inner {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+  }
+  .retreat-card:hover .card-img-inner { transform: scale(1.05); }
+
+  .card-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    z-index: 2;
+  }
+  .badge-pick { background: var(--terracotta); color: white; }
+  .badge-limited { background: rgba(0,0,0,0.75); color: var(--clay); }
+  .badge-new { background: var(--forest); color: var(--cream); }
+
+  .card-wishlist {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: transform 0.2s;
+    z-index: 2;
+  }
+  .card-wishlist:hover { transform: scale(1.2); }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-location {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-host {
+    font-size: 0.78rem;
+    color: var(--charcoal);
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+  .card-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+    background: var(--cream);
+    color: var(--charcoal);
+    opacity: 0.8;
+    text-transform: uppercase;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--dust);
+  }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .card-duration {
+    font-size: 0.75rem;
+    color: var(--charcoal);
+    opacity: 0.5;
+  }
+  .card-spots {
+    font-size: 0.7rem;
+    color: var(--terracotta);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .card-price {
+    text-align: right;
+  }
+  .price-from {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.5;
+  }
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1;
+  }
+  .price-per {
+    font-size: 0.65rem;
+    color: var(--charcoal);
+    opacity: 0.5;
+  }
+
+  /* ─── FEATURED BANNER ─── */
+  .featured-banner {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    min-height: 420px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .featured-img {
+    background: linear-gradient(135deg, #2D4A3E 0%, #4A6B5C 50%, #5C8A72 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .featured-img-decor {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .featured-img-decor::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .featured-img-decor::after {
+    content: '';
+    position: absolute;
+    inset: 60px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .featured-icon {
+    font-size: 5rem;
+    position: relative;
+    z-index: 2;
+    opacity: 0.6;
+  }
+
+  .featured-content {
+    background: var(--forest);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--cream);
+  }
+
+  .featured-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .featured-eyebrow::before {
+    content: '';
+    width: 1.5rem;
+    height: 1px;
+    background: var(--clay);
+  }
+
+  .featured-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .featured-title em { font-style: italic; color: var(--clay); }
+
+  .featured-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.65;
+    margin-bottom: 2rem;
+  }
+
+  .featured-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .featured-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .detail-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    opacity: 0.7;
+    font-weight: 500;
+  }
+  .detail-value {
+    font-size: 0.88rem;
+    color: var(--cream);
+    opacity: 0.9;
+  }
+
+  .featured-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .featured-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+  .featured-price-note {
+    font-size: 0.72rem;
+    opacity: 0.5;
+    margin-top: 0.2rem;
+  }
+
+  .btn-cream {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.9rem 2rem;
+    background: var(--cream);
+    color: var(--forest);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-cream:hover { background: var(--terracotta); color: white; }
+
+  /* ─── CATEGORIES ─── */
+  .categories-section {
+    padding: 5rem 4rem;
+    background: var(--cream);
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 3rem auto 0;
+  }
+
+  .category-card {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .category-card:hover { transform: translateY(-3px); }
+  .category-card:hover .cat-img { transform: scale(1.08); }
+
+  .cat-img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+  }
+
+  .cat-c1 { background: linear-gradient(160deg, #3D5A3A 0%, #5A7A52 100%); }
+  .cat-c2 { background: linear-gradient(160deg, #4A5A6E 0%, #6A7A9A 100%); }
+  .cat-c3 { background: linear-gradient(160deg, #3A4A5C 0%, #2D3A4E 100%); }
+  .cat-c4 { background: linear-gradient(160deg, #7A5A3A 0%, #A0785A 100%); }
+  .cat-c5 { background: linear-gradient(160deg, #4A3A5C 0%, #6A5A7E 100%); }
+  .cat-c6 { background: linear-gradient(160deg, #3A5C50 0%, #52806E 100%); }
+
+  .cat-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 2.5rem;
+    opacity: 0.5;
+  }
+
+  .cat-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 0.8rem 0.8rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.5));
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* ─── RETREAT DETAIL MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 28, 26, 0.7);
+    z-index: 200;
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; padding: 2rem; }
+
+  .modal {
+    background: var(--warm-white);
+    max-width: 900px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    animation: modalSlide 0.35s ease;
+  }
+
+  @keyframes modalSlide {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: sticky;
+    top: 1rem;
+    float: right;
+    margin: 1rem 1rem 0 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: white;
+    border: 1px solid var(--dust);
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .modal-hero {
+    height: 380px;
+    background: linear-gradient(135deg, #2D4A3E 0%, #4A6B5C 60%, #7A8C6E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-hero-decor {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-hero-icon {
+    font-size: 6rem;
+    opacity: 0.4;
+    position: relative;
+    z-index: 2;
+  }
+
+  .modal-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  }
+
+  .modal-hero-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    background: var(--terracotta);
+    color: white;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .modal-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.15;
+  }
+
+  .modal-hero-loc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.1em;
+    margin-top: 0.4rem;
+  }
+
+  .modal-body {
+    padding: 2.5rem;
+  }
+
+  .modal-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 3rem;
+  }
+
+  .modal-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--forest);
+    margin-bottom: 1rem;
+  }
+
+  .modal-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--charcoal);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+
+  .itinerary-day {
+    border-left: 2px solid var(--dust);
+    padding: 0 0 1.5rem 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  .itinerary-day::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 4px;
+    width: 8px;
+    height: 8px;
+    background: var(--sage);
+    border-radius: 50%;
+  }
+  .day-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--forest);
+    margin-bottom: 0.3rem;
+  }
+  .day-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    opacity: 0.6;
+  }
+
+  .booking-box {
+    background: var(--forest);
+    padding: 2rem;
+    color: var(--cream);
+    position: sticky;
+    top: 2rem;
+  }
+
+  .booking-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .booking-price-note {
+    font-size: 0.72rem;
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .booking-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 1.5rem 0;
+  }
+
+  .booking-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .booking-option-label {
+    font-size: 0.78rem;
+    opacity: 0.7;
+  }
+  .booking-option-value {
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  .date-picker {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+
+  .room-select {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .room-select option { background: var(--forest); }
+
+  .btn-book {
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--terracotta);
+    border: none;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.25s;
+    margin-bottom: 0.8rem;
+  }
+  .btn-book:hover { background: var(--clay); }
+
+  .btn-deposit {
+    width: 100%;
+    padding: 1.1rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-bottom: 1rem;
+  }
+  .btn-deposit:hover { border-color: var(--clay); color: var(--clay); }
+
+  .booking-note {
+    font-size: 0.7rem;
+    opacity: 0.4;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .includes-list {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  .includes-list li {
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--dust);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--charcoal);
+    opacity: 0.8;
+  }
+  .includes-list li::before {
+    content: '✓';
+    color: var(--sage);
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  /* ─── HOST SPOTLIGHT ─── */
+  .host-section {
+    background: var(--dust);
+    padding: 5rem 4rem;
+  }
+
+  .host-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 3rem auto 0;
+  }
+
+  .host-card {
+    background: white;
+    padding: 2rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    transition: transform 0.25s;
+    cursor: pointer;
+  }
+  .host-card:hover { transform: translateY(-2px); }
+
+  .host-avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  .av1 { background: linear-gradient(135deg, #4A6B5C, #2D4A3E); }
+  .av2 { background: linear-gradient(135deg, #8A5A3A, #C4906A); }
+  .av3 { background: linear-gradient(135deg, #4A5A7A, #2D3A5C); }
+
+  .host-info {}
+  .host-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--forest);
+    margin-bottom: 0.2rem;
+  }
+  .host-specialty {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+  }
+  .host-bio {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+  }
+  .host-meta {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .host-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .host-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1;
+  }
+  .host-stat-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.45;
+    font-weight: 500;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 4rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    opacity: 0.4;
+    max-width: 260px;
+  }
+
+  .footer-col-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--clay);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: var(--cream);
+    text-decoration: none;
+    opacity: 0.45;
+    transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 0.85; }
+
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    opacity: 0.3;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.7s ease backwards;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ─── PAGE TABS ─── */
+  .page-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--dust);
+  }
+  .tab {
+    padding: 1rem 1.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--charcoal);
+    opacity: 0.45;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .tab.active {
+    opacity: 1;
+    border-bottom-color: var(--forest);
+    background: white;
+  }
+  .tab:hover { opacity: 0.8; }
+
+  .page-content { display: none; }
+  .page-content.active { display: block; }
+
+  /* ─── DASHBOARD ─── */
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 70vh;
+    background: var(--warm-white);
+  }
+
+  .dash-sidebar {
+    background: var(--forest);
+    padding: 2rem 0;
+    color: var(--cream);
+  }
+
+  .dash-user {
+    padding: 0 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 1rem;
+  }
+
+  .dash-avatar {
+    width: 3rem;
+    height: 3rem;
+    background: var(--sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .dash-user-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .dash-user-email {
+    font-size: 0.72rem;
+    opacity: 0.45;
+    margin-top: 0.1rem;
+  }
+
+  .dash-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+    color: var(--cream);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .dash-nav-item:hover, .dash-nav-item.active {
+    opacity: 1;
+    background: rgba(255,255,255,0.07);
+  }
+  .dash-nav-item.active {
+    border-left: 2px solid var(--clay);
+  }
+
+  .dash-main {
+    padding: 2.5rem;
+  }
+
+  .dash-header {
+    margin-bottom: 2rem;
+  }
+
+  .dash-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--forest);
+    margin-bottom: 0.3rem;
+  }
+
+  .dash-subtitle {
+    font-size: 0.82rem;
+    color: var(--charcoal);
+    opacity: 0.5;
+  }
+
+  .dash-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .dash-card {
+    background: white;
+    padding: 1.5rem;
+    border-left: 3px solid var(--dust);
+  }
+  .dash-card.accent { border-left-color: var(--terracotta); }
+  .dash-card.green { border-left-color: var(--sage); }
+  .dash-card.gold { border-left-color: var(--gold); }
+
+  .dash-card-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.5;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+
+  .dash-card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .dash-card-note {
+    font-size: 0.75rem;
+    color: var(--sage);
+  }
+
+  .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+
+  .bookings-table th {
+    text-align: left;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.45;
+    font-weight: 500;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--dust);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .bookings-table td {
+    padding: 1rem 1.2rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--dust);
+    color: var(--charcoal);
+    vertical-align: middle;
+  }
+
+  .booking-status {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.25rem 0.7rem;
+  }
+  .status-confirmed { background: #EAF2E8; color: var(--sage); }
+  .status-pending { background: #FEF3E2; color: #B86840; }
+  .status-waitlist { background: var(--dust); color: var(--charcoal); opacity: 0.7; }
+
+  .nav-logo-link { text-decoration: none; cursor: pointer; }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo nav-logo-link" onclick="showPage('marketplace')">RAYSUNDO</div>
+  <ul class="nav-links">
+    <li><a href="#" id="nav-explore" onclick="navTo('explore'); return false;">Explore</a></li>
+    <li><a href="#" id="nav-categories" onclick="navTo('categories'); return false;">Categories</a></li>
+    <li><a href="#" id="nav-host" onclick="navTo('host'); return false;">Host a Retreat</a></li>
+    <li><a href="#" id="nav-about" onclick="navTo('about'); return false;">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-ghost" onclick="showPage('guest')">Sign In</button>
+    <button class="btn-solid" onclick="showPage('guest')">Join Free</button>
+  </div>
+</nav>
+
+<!-- PAGE TABS -->
+<div class="page-tabs" style="padding-top: 4.5rem;">
+  <button class="tab active" onclick="showPage('marketplace')">🌿 Marketplace</button>
+  <button class="tab" onclick="showPage('listing')">🏔 Retreat Detail</button>
+  <button class="tab" onclick="showPage('guest')">👤 Guest Dashboard</button>
+  <button class="tab" onclick="showPage('host')">🏠 Host Dashboard</button>
+  <button class="tab" onclick="showPage('admin')">⚙️ Admin</button>
+</div>
+
+<!-- ═══ PAGE: MARKETPLACE ═══ -->
+<div id="page-marketplace" class="page-content active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Curated transformative experiences</div>
+      <h1 class="hero-title">
+        Escapes that<br>
+        <em>reshape</em> you
+      </h1>
+      <p class="hero-subtitle">Discover handpicked retreats — from silent mountain treks to breathwork immersions. Each one vetted for depth, safety, and transformation.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.querySelector('.search-section').scrollIntoView({behavior:'smooth'})">Explore Retreats</button>
+        <button class="btn-outline" onclick="showPage('host')">Host Your Retreat</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">340+</div>
+          <div class="stat-label">Retreats</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">58</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12k</div>
+          <div class="stat-label">Guests Hosted</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-image-grid">
+        <div class="hero-img">
+          <div class="hero-img-inner img-forest"></div>
+          <span class="hero-img-label">Forest Bathing</span>
+        </div>
+        <div class="hero-img">
+          <div class="hero-img-inner img-mountain"></div>
+          <span class="hero-img-label">Alpine Trekking</span>
+        </div>
+        <div class="hero-img">
+          <div class="hero-img-inner img-lake"></div>
+          <span class="hero-img-label">Cold Immersion</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <section class="search-section">
+    <div class="search-wrap">
+      <div class="search-label">Find your retreat</div>
+      <div class="search-bar">
+        <div class="search-field">
+          <label>Destination</label>
+          <input type="text" placeholder="Anywhere in the world...">
+        </div>
+        <div class="search-field">
+          <label>When</label>
+          <select><option>Any dates</option><option>March 2025</option><option>April 2025</option><option>May 2025</option></select>
+        </div>
+        <div class="search-field">
+          <label>Duration</label>
+          <select><option>Any length</option><option>Weekend</option><option>1 week</option><option>2 weeks</option></select>
+        </div>
+        <div class="search-field">
+          <label>Activity</label>
+          <select><option>All types</option><option>Hiking</option><option>Breathwork</option><option>Yoga</option><option>Cold Immersion</option></select>
+        </div>
+        <button class="search-btn">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER CHIPS -->
+  <div class="filter-section">
+    <div class="filter-chips">
+      <span style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal);opacity:0.4;font-weight:500;margin-right:0.5rem;">Filter by</span>
+      <button class="filter-chip active">All</button>
+      <button class="filter-chip">🥾 Hiking</button>
+      <button class="filter-chip">🌬️ Breathwork</button>
+      <button class="filter-chip">🧊 Cold Immersion</button>
+      <button class="filter-chip">📵 Digital Detox</button>
+      <button class="filter-chip">🧘 Yoga & Meditation</button>
+      <button class="filter-chip">🌊 Ocean & Surf</button>
+      <button class="filter-chip">🏔️ Alpine</button>
+      <div class="filter-divider"></div>
+      <button class="filter-chip">Under €1,000</button>
+      <button class="filter-chip">Editor's Pick</button>
+      <button class="filter-chip">Spots Available</button>
+    </div>
+  </div>
+
+  <!-- LISTINGS -->
+  <section class="listings-section">
+    <div class="section-header">
+      <h2 class="section-title">Featured <span>retreats</span></h2>
+      <span class="section-count">47 results</span>
+    </div>
+
+    <div class="listings-grid">
+
+      <!-- FEATURED BANNER CARD -->
+      <div class="featured-banner">
+        <div class="featured-img">
+          <div class="featured-img-decor"></div>
+          <div class="featured-icon">🌲</div>
+        </div>
+        <div class="featured-content">
+          <div class="featured-eyebrow">Editor's Pick · July 2025</div>
+          <h3 class="featured-title">Dolomites Deep <em>Forest Reset</em></h3>
+          <p class="featured-desc">Seven days of intentional silence, forest therapy, and ice bath immersion nestled at 2,100m in the Italian Alps. A full reset for the overworked mind.</p>
+          <div class="featured-details">
+            <div class="featured-detail">
+              <span class="detail-label">Duration</span>
+              <span class="detail-value">7 nights</span>
+            </div>
+            <div class="featured-detail">
+              <span class="detail-label">Location</span>
+              <span class="detail-value">Trentino, Italy</span>
+            </div>
+            <div class="featured-detail">
+              <span class="detail-label">Group size</span>
+              <span class="detail-value">Max 12 guests</span>
+            </div>
+            <div class="featured-detail">
+              <span class="detail-label">Fitness level</span>
+              <span class="detail-value">Moderate</span>
+            </div>
+          </div>
+          <div class="featured-price-row">
+            <div>
+              <div class="featured-price">€2,490</div>
+              <div class="featured-price-note">per person, shared room</div>
+            </div>
+            <button class="btn-cream" onclick="showPage('listing')">View Retreat →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 1 -->
+      <div class="retreat-card" onclick="showPage('listing')">
+        <div class="card-image">
+          <div class="card-img-inner img-mountain"></div>
+          <span class="card-badge badge-limited">3 spots left</span>
+          <button class="card-wishlist" onclick="event.stopPropagation()">♡</button>
+        </div>
+        <div class="card-body">
+          <div class="card-location">📍 Jura, Switzerland</div>
+          <h3 class="card-title">Alpine Breathwork & Ice Immersion</h3>
+          <div class="card-host">Hosted by Marcus Holt</div>
+          <div class="card-tags">
+            <span class="card-tag">Breathwork</span>
+            <span class="card-tag">Cold Exposure</span>
+            <span class="card-tag">Mixed</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-meta">
+              <span class="card-duration">5 nights · Apr 18–23</span>
+              <span class="card-spots">⚡ Only 3 spots remaining</span>
+            </div>
+            <div class="card-price">
+              <div class="price-from">From</div>
+              <div class="price-amount">€1,850</div>
+              <div class="price-per">per person</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="retreat-card" onclick="showPage('listing')">
+        <div class="card-image">
+          <div class="card-img-inner img-desert"></div>
+          <span class="card-badge badge-new">New</span>
+          <button class="card-wishlist" onclick="event.stopPropagation()">♡</button>
+        </div>
+        <div class="card-body">
+          <div class="card-location">📍 Atlas Mountains, Morocco</div>
+          <h3 class="card-title">Desert Silence — A Digital Detox Journey</h3>
+          <div class="card-host">Hosted by Layla Aziz</div>
+          <div class="card-tags">
+            <span class="card-tag">Digital Detox</span>
+            <span class="card-tag">Meditation</span>
+            <span class="card-tag">Women-Only</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-meta">
+              <span class="card-duration">10 nights · May 5–15</span>
+              <span class="card-spots">8 of 14 spots filled</span>
+            </div>
+            <div class="card-price">
+              <div class="price-from">From</div>
+              <div class="price-amount">€2,100</div>
+              <div class="price-per">per person</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="retreat-card" onclick="showPage('listing')">
+        <div class="card-image">
+          <div class="card-img-inner img-lake"></div>
+          <span class="card-badge badge-pick">Editor's Pick</span>
+          <button class="card-wishlist" onclick="event.stopPropagation()">♡</button>
+        </div>
+        <div class="card-body">
+          <div class="card-location">📍 Åre, Sweden</div>
+          <h3 class="card-title">Nordic Cold & Sauna Ritual Immersion</h3>
+          <div class="card-host">Hosted by Erik Svensson</div>
+          <div class="card-tags">
+            <span class="card-tag">Cold Immersion</span>
+            <span class="card-tag">Sauna</span>
+            <span class="card-tag">All levels</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-meta">
+              <span class="card-duration">4 nights · Mar 28–Apr 1</span>
+              <span class="card-spots">5 of 10 spots filled</span>
+            </div>
+            <div class="card-price">
+              <div class="price-from">From</div>
+              <div class="price-amount">€1,290</div>
+              <div class="price-per">per person</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="retreat-card" onclick="showPage('listing')">
+        <div class="card-image">
+          <div class="card-img-inner img-forest"></div>
+          <button class="card-wishlist" onclick="event.stopPropagation()">♡</button>
+        </div>
+        <div class="card-body">
+          <div class="card-location">📍 Black Forest, Germany</div>
+          <h3 class="card-title">Forest Bathing & Somatic Healing</h3>
+          <div class="card-host">Hosted by Dr. Anna Klein</div>
+          <div class="card-tags">
+            <span class="card-tag">Forest Therapy</span>
+            <span class="card-tag">Somatic</span>
+            <span class="card-tag">Low intensity</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-meta">
+              <span class="card-duration">3 nights · Apr 4–7</span>
+              <span class="card-spots">2 of 8 spots filled</span>
+            </div>
+            <div class="card-price">
+              <div class="price-from">From</div>
+              <div class="price-amount">€880</div>
+              <div class="price-per">per person</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories-section" id="categories">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div class="section-header">
+        <h2 class="section-title">Browse by <span>type</span></h2>
+      </div>
+    </div>
+    <div class="categories-grid" style="max-width:1400px;margin:3rem auto 0;">
+      <div class="category-card"><div class="cat-img cat-c1"></div><div class="cat-icon">🥾</div><div class="cat-name">Hiking</div></div>
+      <div class="category-card"><div class="cat-img cat-c2"></div><div class="cat-icon">🌬️</div><div class="cat-name">Breathwork</div></div>
+      <div class="category-card"><div class="cat-img cat-c3"></div><div class="cat-icon">🧊</div><div class="cat-name">Cold Immersion</div></div>
+      <div class="category-card"><div class="cat-img cat-c4"></div><div class="cat-icon">📵</div><div class="cat-name">Digital Detox</div></div>
+      <div class="category-card"><div class="cat-img cat-c5"></div><div class="cat-icon">🧘</div><div class="cat-name">Yoga & Meditation</div></div>
+      <div class="category-card"><div class="cat-img cat-c6"></div><div class="cat-icon">🌊</div><div class="cat-name">Ocean & Surf</div></div>
+    </div>
+  </section>
+
+  <!-- HOST SPOTLIGHT -->
+  <section class="host-section">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div class="section-header">
+        <h2 class="section-title">Meet the <span>hosts</span></h2>
+        <span class="section-count">Verified &amp; vetted operators</span>
+      </div>
+      <div class="host-grid">
+        <div class="host-card">
+          <div class="host-avatar av1">🌲</div>
+          <div class="host-info">
+            <div class="host-name">Marcus Holt</div>
+            <div class="host-specialty">Breathwork · Cold Exposure</div>
+            <div class="host-bio">Former alpine guide turned somatic coach. 12 years running transformative retreats across Switzerland and Austria.</div>
+            <div class="host-meta">
+              <div class="host-stat"><div class="host-stat-num">147</div><div class="host-stat-label">Guests</div></div>
+              <div class="host-stat"><div class="host-stat-num">4.9</div><div class="host-stat-label">Rating</div></div>
+              <div class="host-stat"><div class="host-stat-num">8</div><div class="host-stat-label">Retreats</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="host-card">
+          <div class="host-avatar av2">🌅</div>
+          <div class="host-info">
+            <div class="host-name">Layla Aziz</div>
+            <div class="host-specialty">Digital Detox · Meditation</div>
+            <div class="host-bio">Mindfulness teacher and wilderness guide specialising in women-only immersive experiences across North Africa and the Middle East.</div>
+            <div class="host-meta">
+              <div class="host-stat"><div class="host-stat-num">89</div><div class="host-stat-label">Guests</div></div>
+              <div class="host-stat"><div class="host-stat-num">5.0</div><div class="host-stat-label">Rating</div></div>
+              <div class="host-stat"><div class="host-stat-num">4</div><div class="host-stat-label">Retreats</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="host-card">
+          <div class="host-avatar av3">❄️</div>
+          <div class="host-info">
+            <div class="host-name">Dr. Anna Klein</div>
+            <div class="host-specialty">Forest Therapy · Somatic</div>
+            <div class="host-bio">Clinical psychologist and certified forest therapy guide. Blends evidence-based somatic techniques with deep nature immersion.</div>
+            <div class="host-meta">
+              <div class="host-stat"><div class="host-stat-num">204</div><div class="host-stat-label">Guests</div></div>
+              <div class="host-stat"><div class="host-stat-num">4.8</div><div class="host-stat-label">Rating</div></div>
+              <div class="host-stat"><div class="host-stat-num">11</div><div class="host-stat-label">Retreats</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-marketplace -->
+
+<!-- ═══ PAGE: LISTING DETAIL ═══ -->
+<div id="page-listing" class="page-content">
+  <div style="background:var(--forest);padding:0.8rem 4rem;display:flex;align-items:center;gap:0.5rem;">
+    <button onclick="showPage('marketplace')" style="background:none;border:none;color:var(--clay);cursor:pointer;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">← Back to Marketplace</button>
+  </div>
+
+  <div class="modal-hero">
+    <div class="modal-hero-decor"></div>
+    <div class="modal-hero-icon">🌲</div>
+    <div class="modal-hero-overlay">
+      <span class="modal-hero-badge">Editor's Pick</span>
+      <div class="modal-hero-title">Dolomites Deep Forest Reset</div>
+      <div class="modal-hero-loc">📍 Trentino, Italy · 7 nights</div>
+    </div>
+  </div>
+
+  <div class="modal-body" style="max-width:1200px;margin:0 auto;">
+    <div class="modal-grid">
+      <div>
+        <p class="modal-text">Seven days of intentional silence, forest therapy, and ice bath immersion nestled at 2,100m in the Italian Alps. A full reset for the overworked mind — guided by certified forest therapists and breathwork practitioners. Maximum 12 guests ensures deep, personal transformation.</p>
+
+        <div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+            <div style="padding:1rem;background:var(--cream);">
+              <div style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:0.4rem;">Who it's for</div>
+              <div style="font-size:0.83rem;line-height:1.65;color:var(--charcoal);opacity:0.7;">Professionals seeking deep rest, those wanting to reconnect with nature, people open to somatic and breathwork practices.</div>
+            </div>
+            <div style="padding:1rem;background:var(--cream);">
+              <div style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--terracotta);font-weight:600;margin-bottom:0.4rem;">Who it's not for</div>
+              <div style="font-size:0.83rem;line-height:1.65;color:var(--charcoal);opacity:0.7;">Those unable to commit to partial phone silence, anyone with serious cardiovascular conditions (for ice baths), under 18s.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="modal-section-title">Itinerary</h3>
+        <div class="itinerary-day">
+          <div class="day-label">Day 1</div>
+          <div class="day-title">Arrival & Grounding</div>
+          <div class="day-desc">Arrive by 4pm. Gentle forest walk, welcome ceremony, group dinner. Phone storage begins. Settling into your private or shared lodge room.</div>
+        </div>
+        <div class="itinerary-day">
+          <div class="day-label">Days 2–4</div>
+          <div class="day-title">Deep Immersion</div>
+          <div class="day-desc">Morning ice bath protocols, breathwork sessions, guided forest therapy walks, solo silence periods. Evening fireside reflections. Organic meals prepared on-site.</div>
+        </div>
+        <div class="itinerary-day">
+          <div class="day-label">Days 5–6</div>
+          <div class="day-title">Integration Work</div>
+          <div class="day-desc">Somatic movement sessions, journaling workshops, extended solo nature time. One-on-one check-ins with lead guide. Optional summit hike (Day 6).</div>
+        </div>
+        <div class="itinerary-day">
+          <div class="day-label">Day 7</div>
+          <div class="day-title">Closing & Return</div>
+          <div class="day-desc">Morning closing circle, integration intention-setting, departures from 11am. Post-retreat integration call scheduled for 2 weeks after.</div>
+        </div>
+
+        <h3 class="modal-section-title" style="margin-top:2rem;">What's Included</h3>
+        <ul class="includes-list">
+          <li>7 nights accommodation (shared or private room)</li>
+          <li>All meals — organic, locally sourced</li>
+          <li>All guided sessions (breathwork, forest therapy, ice baths)</li>
+          <li>Post-retreat integration support call</li>
+          <li>Airport shuttle from Bolzano</li>
+        </ul>
+
+        <h3 class="modal-section-title">Host</h3>
+        <div class="host-card" style="background:var(--cream);margin-bottom:2rem;">
+          <div class="host-avatar av1">🌲</div>
+          <div class="host-info">
+            <div class="host-name">Marcus Holt</div>
+            <div class="host-specialty">Breathwork · Cold Exposure · Forest Therapy</div>
+            <div class="host-bio">Former alpine guide turned somatic coach. 12 years running transformative retreats across Switzerland and Austria. Certified Wim Hof instructor and clinical breathwork practitioner.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKING BOX -->
+      <div>
+        <div class="booking-box">
+          <div class="booking-price">€2,490</div>
+          <div class="booking-price-note">per person · shared room</div>
+
+          <hr class="booking-divider">
+
+          <label style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--clay);opacity:0.8;display:block;margin-bottom:0.5rem;font-weight:500;">Select Date</label>
+          <select class="date-picker">
+            <option>July 12–19, 2025 — 4 spots left</option>
+            <option>Aug 9–16, 2025 — 7 spots left</option>
+            <option>Sep 6–13, 2025 — 12 spots left</option>
+          </select>
+
+          <label style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--clay);opacity:0.8;display:block;margin-bottom:0.5rem;font-weight:500;">Room Type</label>
+          <select class="room-select">
+            <option>Shared room — €2,490</option>
+            <option>Private room — €3,290</option>
+          </select>
+
+          <div class="booking-option"><span class="booking-option-label">Base price</span><span class="booking-option-value">€2,490</span></div>
+          <div class="booking-option"><span class="booking-option-label">Platform fee</span><span class="booking-option-value">€0</span></div>
+          <hr class="booking-divider">
+          <div class="booking-option"><span class="booking-option-label" style="font-weight:600;opacity:1;">Total</span><span class="booking-option-value" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;">€2,490</span></div>
+
+          <hr class="booking-divider">
+
+          <button class="btn-book">Book Now — Full Payment</button>
+          <button class="btn-deposit">Reserve with €490 Deposit</button>
+
+          <div class="booking-note">Free cancellation up to 60 days before · Installment plans available · Secure checkout via Stripe</div>
+        </div>
+
+        <div style="padding:1.5rem;background:white;margin-top:1.5rem;border:1px solid var(--dust);">
+          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--charcoal);opacity:0.5;margin-bottom:1rem;font-weight:500;">Also available</div>
+          <div style="font-size:0.82rem;line-height:1.8;color:var(--charcoal);opacity:0.7;">
+            ✦ Private 1:1 coaching add-on (+€350)<br>
+            ✦ Extended stay (8th night) (+€280)<br>
+            ✦ Pre-retreat preparation call (free)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-listing -->
+
+<!-- ═══ PAGE: GUEST DASHBOARD ═══ -->
+<div id="page-guest" class="page-content">
+  <div class="dashboard-layout">
+    <div class="dash-sidebar">
+      <div class="dash-user">
+        <div class="dash-avatar">🌿</div>
+        <div class="dash-user-name">Sofia Marchetti</div>
+        <div class="dash-user-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9fecf0f9f6fedffae7fef2eff3fab1fcf0f2">[email&#160;protected]</a></div>
+      </div>
+      <div class="dash-nav-item active">🗂 My Bookings</div>
+      <div class="dash-nav-item">♡ Saved Retreats</div>
+      <div class="dash-nav-item">💳 Payments</div>
+      <div class="dash-nav-item">📄 Documents</div>
+      <div class="dash-nav-item">👤 Profile</div>
+      <div class="dash-nav-item" style="margin-top:auto;">⟵ Sign Out</div>
+    </div>
+
+    <div class="dash-main">
+      <div class="dash-header">
+        <div class="dash-title">My Retreats</div>
+        <div class="dash-subtitle">Your upcoming journeys and booking history</div>
+      </div>
+
+      <div class="dash-cards">
+        <div class="dash-card accent">
+          <div class="dash-card-label">Upcoming</div>
+          <div class="dash-card-value">1</div>
+          <div class="dash-card-note">Dolomites · Jul 12</div>
+        </div>
+        <div class="dash-card green">
+          <div class="dash-card-label">Total retreats attended</div>
+          <div class="dash-card-value">3</div>
+          <div class="dash-card-note">Since joining 2023</div>
+        </div>
+        <div class="dash-card gold">
+          <div class="dash-card-label">Next installment</div>
+          <div class="dash-card-value">€490</div>
+          <div class="dash-card-note">Due Jun 12, 2025</div>
+        </div>
+      </div>
+
+      <table class="bookings-table">
+        <thead>
+          <tr>
+            <th>Retreat</th>
+            <th>Dates</th>
+            <th>Location</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;">Dolomites Deep Forest Reset</strong><br><span style="font-size:0.75rem;opacity:0.5;">Host: Marcus Holt</span></td>
+            <td>Jul 12–19, 2025</td>
+            <td>Trentino, Italy</td>
+            <td>€2,490<br><span style="font-size:0.72rem;opacity:0.5;">€490 paid · €2,000 due</span></td>
+            <td><span class="booking-status status-confirmed">Confirmed</span></td>
+            <td><button class="btn-ghost" style="font-size:0.7rem;padding:0.4rem 0.8rem;">View</button></td>
+          </tr>
+          <tr>
+            <td><strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;">Nordic Cold Ritual Immersion</strong><br><span style="font-size:0.75rem;opacity:0.5;">Host: Erik Svensson</span></td>
+            <td>Jan 8–12, 2025</td>
+            <td>Åre, Sweden</td>
+            <td>€1,290</td>
+            <td><span class="booking-status status-confirmed">Completed</span></td>
+            <td><button class="btn-ghost" style="font-size:0.7rem;padding:0.4rem 0.8rem;">Review</button></td>
+          </tr>
+          <tr>
+            <td><strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;">Atlas Desert Silence</strong><br><span style="font-size:0.75rem;opacity:0.5;">Host: Layla Aziz</span></td>
+            <td>Jun 3–8, 2025</td>
+            <td>Morocco</td>
+            <td>€2,100</td>
+            <td><span class="booking-status status-waitlist">Waitlist #2</span></td>
+            <td><button class="btn-ghost" style="font-size:0.7rem;padding:0.4rem 0.8rem;">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div><!-- /page-guest -->
+
+<!-- ═══ PAGE: HOST DASHBOARD ═══ -->
+<div id="page-host" class="page-content">
+  <div class="dashboard-layout">
+    <div class="dash-sidebar" style="background:#2D3A2E;">
+      <div class="dash-user">
+        <div class="dash-avatar">🏕</div>
+        <div class="dash-user-name">Marcus Holt</div>
+        <div class="dash-user-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd2decddccaccffcddacbcddadecbcc91dcd0d2">[email&#160;protected]</a> · Host</div>
+      </div>
+      <div class="dash-nav-item active">📊 Overview</div>
+      <div class="dash-nav-item">🏕 My Retreats</div>
+      <div class="dash-nav-item">+ Create Retreat</div>
+      <div class="dash-nav-item">👥 Guests</div>
+      <div class="dash-nav-item">💰 Payouts</div>
+      <div class="dash-nav-item">⚙️ Settings</div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-header">
+        <div class="dash-title">Host Dashboard</div>
+        <div class="dash-subtitle">Your retreat performance and upcoming bookings</div>
+      </div>
+
+      <div class="dash-cards" style="grid-template-columns:repeat(4,1fr);">
+        <div class="dash-card accent">
+          <div class="dash-card-label">Revenue (YTD)</div>
+          <div class="dash-card-value">€48,200</div>
+          <div class="dash-card-note">+22% vs last year</div>
+        </div>
+        <div class="dash-card green">
+          <div class="dash-card-label">Confirmed bookings</div>
+          <div class="dash-card-value">34</div>
+          <div class="dash-card-note">Across 3 retreats</div>
+        </div>
+        <div class="dash-card gold">
+          <div class="dash-card-label">Next payout</div>
+          <div class="dash-card-value">€9,800</div>
+          <div class="dash-card-note">Scheduled Apr 15</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-label">Platform fee</div>
+          <div class="dash-card-value">12%</div>
+          <div class="dash-card-note">Standard rate</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:1.2rem;">Active Retreats</div>
+          <table class="bookings-table">
+            <thead><tr><th>Retreat</th><th>Next Date</th><th>Spots</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;">Dolomites Forest Reset</strong></td>
+                <td style="font-size:0.82rem;">Jul 12</td>
+                <td style="font-size:0.82rem;color:var(--terracotta);font-weight:500;">8/12</td>
+                <td><span class="booking-status status-confirmed">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;">Alpine Breathwork</strong></td>
+                <td style="font-size:0.82rem;">Apr 18</td>
+                <td style="font-size:0.82rem;color:var(--terracotta);font-weight:500;">9/12</td>
+                <td><span class="booking-status status-confirmed">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:400;">Winter Ice Ritual</strong></td>
+                <td style="font-size:0.82rem;">Dec 2</td>
+                <td style="font-size:0.82rem;opacity:0.5;">0/10</td>
+                <td><span class="booking-status status-waitlist">Draft</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:1.2rem;">Recent Bookings</div>
+          <table class="bookings-table">
+            <thead><tr><th>Guest</th><th>Retreat</th><th>Paid</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-size:0.85rem;">Sofia M.</td>
+                <td style="font-size:0.82rem;opacity:0.6;">Dolomites</td>
+                <td style="font-size:0.82rem;">€490</td>
+                <td><span class="booking-status status-pending">Deposit</span></td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;">Thomas B.</td>
+                <td style="font-size:0.82rem;opacity:0.6;">Alpine</td>
+                <td style="font-size:0.82rem;">€1,850</td>
+                <td><span class="booking-status status-confirmed">Full</span></td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;">Ingrid K.</td>
+                <td style="font-size:0.82rem;opacity:0.6;">Dolomites</td>
+                <td style="font-size:0.82rem;">€2,490</td>
+                <td><span class="booking-status status-confirmed">Full</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: ADMIN ═══ -->
+<div id="page-admin" class="page-content">
+  <div class="dashboard-layout">
+    <div class="dash-sidebar" style="background:var(--charcoal);">
+      <div class="dash-user">
+        <div class="dash-avatar" style="background:var(--terracotta);">⚙</div>
+        <div class="dash-user-name">Admin Panel</div>
+        <div class="dash-user-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aadac6cbdeccc5d8c7ead8cbd3d9dfc4cec584c9c5c7">[email&#160;protected]</a></div>
+      </div>
+      <div class="dash-nav-item active">📊 Analytics</div>
+      <div class="dash-nav-item">🏕 Listing Approvals</div>
+      <div class="dash-nav-item">💰 Financials</div>
+      <div class="dash-nav-item">🏷 Coupons</div>
+      <div class="dash-nav-item">👥 Users</div>
+      <div class="dash-nav-item">⚙️ Settings</div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-header">
+        <div class="dash-title">Platform Analytics</div>
+        <div class="dash-subtitle">Real-time overview of RAYSUNDO marketplace performance</div>
+      </div>
+
+      <div class="dash-cards" style="grid-template-columns:repeat(4,1fr);">
+        <div class="dash-card accent">
+          <div class="dash-card-label">Gross Booking Value</div>
+          <div class="dash-card-value">€312k</div>
+          <div class="dash-card-note">March 2025 (YTD)</div>
+        </div>
+        <div class="dash-card green">
+          <div class="dash-card-label">Platform Revenue</div>
+          <div class="dash-card-value">€37.4k</div>
+          <div class="dash-card-note">12% avg commission</div>
+        </div>
+        <div class="dash-card gold">
+          <div class="dash-card-label">Conversion Rate</div>
+          <div class="dash-card-value">3.8%</div>
+          <div class="dash-card-note">Visit → Booking</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-label">Active Listings</div>
+          <div class="dash-card-value">47</div>
+          <div class="dash-card-note">8 pending approval</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:1.2rem;">Pending Approvals</div>
+          <table class="bookings-table">
+            <thead><tr><th>Listing</th><th>Host</th><th>Price</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-size:0.85rem;"><strong>Pyrenees Horse Trek</strong></td>
+                <td style="font-size:0.82rem;opacity:0.6;">J. Dupont</td>
+                <td style="font-size:0.82rem;">€1,600</td>
+                <td>
+                  <button class="btn-solid" style="font-size:0.68rem;padding:0.3rem 0.7rem;">Approve</button>
+                  <button class="btn-ghost" style="font-size:0.68rem;padding:0.3rem 0.7rem;margin-left:0.3rem;">Reject</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;"><strong>Bali Sound Healing</strong></td>
+                <td style="font-size:0.82rem;opacity:0.6;">K. Wayan</td>
+                <td style="font-size:0.82rem;">€980</td>
+                <td>
+                  <button class="btn-solid" style="font-size:0.68rem;padding:0.3rem 0.7rem;">Approve</button>
+                  <button class="btn-ghost" style="font-size:0.68rem;padding:0.3rem 0.7rem;margin-left:0.3rem;">Reject</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;"><strong>Scottish Wild Camping</strong></td>
+                <td style="font-size:0.82rem;opacity:0.6;">A. MacLeod</td>
+                <td style="font-size:0.82rem;">€750</td>
+                <td>
+                  <button class="btn-solid" style="font-size:0.68rem;padding:0.3rem 0.7rem;">Approve</button>
+                  <button class="btn-ghost" style="font-size:0.68rem;padding:0.3rem 0.7rem;margin-left:0.3rem;">Reject</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:1.2rem;">Revenue by Host</div>
+          <table class="bookings-table">
+            <thead><tr><th>Host</th><th>Bookings</th><th>GMV</th><th>Commission</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-size:0.85rem;">Marcus Holt</td>
+                <td style="font-size:0.82rem;">34</td>
+                <td style="font-size:0.82rem;">€81,600</td>
+                <td style="font-size:0.82rem;color:var(--sage);font-weight:500;">€9,792</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;">Dr. Anna Klein</td>
+                <td style="font-size:0.82rem;">28</td>
+                <td style="font-size:0.82rem;">€61,200</td>
+                <td style="font-size:0.82rem;color:var(--sage);font-weight:500;">€7,344</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;">Layla Aziz</td>
+                <td style="font-size:0.82rem;">18</td>
+                <td style="font-size:0.82rem;">€37,800</td>
+                <td style="font-size:0.82rem;color:var(--sage);font-weight:500;">€4,536</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.85rem;">Erik Svensson</td>
+                <td style="font-size:0.82rem;">22</td>
+                <td style="font-size:0.82rem;">€28,380</td>
+                <td style="font-size:0.82rem;color:var(--sage);font-weight:500;">€3,406</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: ABOUT ═══ -->
+<div id="page-about" class="page-content">
+
+  <!-- ABOUT HERO -->
+  <div style="background:var(--forest);padding:8rem 4rem 6rem;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;width:500px;height:500px;border:1px solid rgba(255,255,255,0.05);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+    <div style="position:absolute;width:700px;height:700px;border:1px solid rgba(255,255,255,0.03);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+    <div style="font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--clay);font-weight:500;margin-bottom:1.5rem;">Our Story</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;color:var(--cream);line-height:1.1;max-width:700px;margin:0 auto 2rem;">
+      We believe <em style="font-style:italic;color:var(--clay);">leaving</em> is sometimes the most productive thing you can do
+    </h1>
+    <p style="font-size:1rem;line-height:1.8;color:var(--cream);opacity:0.5;max-width:520px;margin:0 auto;">
+      RAYSUNDO was built by people who kept returning from retreats changed — and couldn't find a trustworthy place to discover the next one.
+    </p>
+  </div>
+
+  <!-- MISSION -->
+  <div style="max-width:900px;margin:0 auto;padding:6rem 4rem;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+      <div>
+        <div style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:1.2rem;">The Problem</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--forest);line-height:1.4;margin-bottom:1.2rem;">Finding a good retreat is harder than it should be.</p>
+        <p style="font-size:0.9rem;line-height:1.8;color:var(--charcoal);opacity:0.6;">Instagram ads for wellness experiences that overpromise. No standardised information. No way to compare. No trust layer between seekers and operators. Most people end up booking through word-of-mouth or stumbling onto random websites.</p>
+      </div>
+      <div>
+        <div style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--terracotta);font-weight:600;margin-bottom:1.2rem;">Our Answer</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--forest);line-height:1.4;margin-bottom:1.2rem;">A curated marketplace built on trust.</p>
+        <p style="font-size:0.9rem;line-height:1.8;color:var(--charcoal);opacity:0.6;">Every retreat on RAYSUNDO is reviewed by our team. We standardise listings so you can compare properly. We handle booking, payment protection, and post-retreat support — so operators can focus on what they do best.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div style="background:var(--cream);padding:5rem 4rem;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:4rem;">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--forest);">What we stand for</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;">
+        <div style="padding:2rem;background:white;border-top:3px solid var(--sage);">
+          <div style="font-size:2rem;margin-bottom:1rem;">🔍</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:0.7rem;">Curation over volume</div>
+          <p style="font-size:0.85rem;line-height:1.7;color:var(--charcoal);opacity:0.6;">We'd rather list 50 exceptional retreats than 5,000 mediocre ones. Every listing is reviewed before it goes live.</p>
+        </div>
+        <div style="padding:2rem;background:white;border-top:3px solid var(--terracotta);">
+          <div style="font-size:2rem;margin-bottom:1rem;">🤝</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:0.7rem;">Fair to operators</div>
+          <p style="font-size:0.85rem;line-height:1.7;color:var(--charcoal);opacity:0.6;">We take a transparent commission. No hidden fees, no pay-to-rank. Hosts get real tools and timely payouts.</p>
+        </div>
+        <div style="padding:2rem;background:white;border-top:3px solid var(--clay);">
+          <div style="font-size:2rem;margin-bottom:1rem;">🛡</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:0.7rem;">Protected guests</div>
+          <p style="font-size:0.85rem;line-height:1.7;color:var(--charcoal);opacity:0.6;">Secure payments, clear cancellation policies, and a support team that actually picks up the phone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div style="max-width:1100px;margin:0 auto;padding:6rem 4rem;">
+    <div style="text-align:center;margin-bottom:4rem;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--forest);">The <em style="font-style:italic;color:var(--terracotta);">team</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+      <div style="text-align:center;">
+        <div style="width:5rem;height:5rem;background:linear-gradient(135deg,var(--forest),var(--sage));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.2rem;"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--forest);">Mateo Raya</div>
+        <div style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:500;margin:0.3rem 0 0.8rem;">Co-founder & CEO</div>
+        <p style="font-size:0.82rem;line-height:1.65;color:var(--charcoal);opacity:0.55;">Former investment analyst turned retreat junkie. Built RAYSUNDO after his 12th retreat and still no decent way to find the 13th.</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:5rem;height:5rem;background:linear-gradient(135deg,var(--terracotta),var(--clay));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.2rem;"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--forest);">Sofia Nunes</div>
+        <div style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:500;margin:0.3rem 0 0.8rem;">Co-founder & CPO</div>
+        <p style="font-size:0.82rem;line-height:1.65;color:var(--charcoal);opacity:0.55;">Product designer and former wilderness guide. Has personally attended 30+ retreats across 18 countries to set our curation standard.</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:5rem;height:5rem;background:linear-gradient(135deg,#4A5A7A,#2D3A5C);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.2rem;"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--forest);">Jonas Weiss</div>
+        <div style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);font-weight:500;margin:0.3rem 0 0.8rem;">CTO</div>
+        <p style="font-size:0.82rem;line-height:1.65;color:var(--charcoal);opacity:0.55;">Previously led payments infrastructure at a European fintech. Built the booking and payout systems from scratch.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:var(--forest);padding:5rem 4rem;text-align:center;">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--cream);margin-bottom:1rem;">Ready to find your retreat?</h2>
+    <p style="font-size:0.9rem;color:var(--cream);opacity:0.5;margin-bottom:2.5rem;">340+ curated experiences waiting.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-cream" onclick="navTo('explore')">Browse Retreats</button>
+      <button style="font-family:'DM Sans',sans-serif;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;padding:1rem 2.5rem;background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,0.25);cursor:pointer;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--clay)';this.style.color='var(--clay)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='var(--cream)'" onclick="navTo('host')">Host a Retreat</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer id="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">RAYSUNDO</div>
+      <div class="footer-tagline">A curated marketplace for transformative retreat experiences — connecting seekers with the world's finest operators.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="#">All Retreats</a></li>
+        <li><a href="#">Hiking & Trekking</a></li>
+        <li><a href="#">Cold Immersion</a></li>
+        <li><a href="#">Digital Detox</a></li>
+        <li><a href="#">Map View</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Hosts</div>
+      <ul class="footer-links">
+        <li><a href="#">List a Retreat</a></li>
+        <li><a href="#">Host Dashboard</a></li>
+        <li><a href="#">Payout Info</a></li>
+        <li><a href="#">Guidelines</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Trust & Safety</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 RAYSUNDO — All rights reserved</span>
+    <span class="footer-copy">Privacy · Terms · Cookies</span>
+  </div>
+</footer>
+
+<script>
+  // ── nav routing ──
+  // Maps nav link id → what happens
+  const NAV_ACTIONS = {
+    'nav-explore':     () => { showPage('marketplace'); setTimeout(() => document.querySelector('.search-section')?.scrollIntoView({behavior:'smooth'}), 80); },
+    'nav-categories':  () => { showPage('marketplace'); setTimeout(() => document.getElementById('categories')?.scrollIntoView({behavior:'smooth'}), 80); },
+    'nav-host':        () => showPage('host'),
+    'nav-about':       () => showPage('about'),
+  };
+
+  function navTo(key) {
+    // key can be 'explore','categories','host','about' — or a page name
+    const map = { explore: 'nav-explore', categories: 'nav-categories', host: 'nav-host', about: 'nav-about' };
+    if (map[key]) {
+      NAV_ACTIONS[map[key]]();
+      setActiveNav(map[key]);
+    } else {
+      showPage(key);
+    }
+  }
+
+  function setActiveNav(activeId) {
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const el = document.getElementById(activeId);
+    if (el) el.classList.add('active');
+  }
+
+  function showPage(name) {
+    document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    const page = document.getElementById('page-' + name);
+    if (page) page.classList.add('active');
+    const tabs = { marketplace: 0, listing: 1, guest: 2, host: 3, admin: 4 };
+    document.querySelectorAll('.tab')[tabs[name]]?.classList.add('active');
+    // Show footer only on marketplace & about
+    document.getElementById('site-footer').style.display = (name === 'marketplace' || name === 'about') ? 'block' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Sync active nav indicator
+    const navMap = { marketplace: 'nav-explore', host: 'nav-host', about: 'nav-about' };
+    if (navMap[name]) setActiveNav(navMap[name]);
+  }
+
+  // original showPage scroll was cut off — redefine fully below
+  // Filter chips toggle
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  });
+
+  // Set explore as default active
+  setActiveNav('nav-explore');
+</script>
+</body>
+</html>

@@ -1479,13 +1479,185 @@
 
   .nav-logo-link { text-decoration: none; cursor: pointer; }
 
+  /* ─── HAMBURGER ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    z-index: 110;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--forest);
+    transition: all 0.3s;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--warm-white);
+    z-index: 105;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    padding-top: 5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--terracotta); }
+  .mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 200px;
+    margin-top: 1rem;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    /* Nav */
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links, .nav-actions { display: none; }
+    .hamburger { display: flex; }
+
+    /* Page tabs — horizontal scroll */
+    .page-tabs { padding-top: 3.8rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .page-tabs::-webkit-scrollbar { display: none; }
+    .tab { white-space: nowrap; font-size: 0.68rem; padding: 0.9rem 1.2rem; }
+
+    /* Hero */
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 4rem;
+    }
+    .hero-left {
+      padding: 3rem 1.5rem 2rem;
+      order: 1;
+    }
+    .hero-right {
+      order: 2;
+      height: 55vw;
+      min-height: 240px;
+    }
+    .hero-stats { gap: 1.5rem; margin-top: 2.5rem; padding-top: 2rem; }
+
+    /* Search */
+    .search-section { padding: 1.8rem 1.5rem; }
+    .search-bar {
+      grid-template-columns: 1fr;
+      border: none;
+      gap: 2px;
+    }
+    .search-field {
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .search-btn { padding: 1rem; text-align: center; }
+
+    /* Filters */
+    .filter-section { padding: 1rem 1.5rem; }
+
+    /* Listings */
+    .listings-section { padding: 2rem 1.5rem; }
+    .listings-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .featured-banner { grid-template-columns: 1fr; min-height: auto; }
+    .featured-img { height: 220px; }
+    .featured-content { padding: 2rem 1.5rem; }
+    .featured-title { font-size: 1.7rem; }
+    .featured-price-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .btn-cream { width: 100%; text-align: center; }
+
+    /* Categories */
+    .categories-section { padding: 3rem 1.5rem; }
+    .categories-grid { grid-template-columns: repeat(3, 1fr); }
+
+    /* Host section */
+    .host-section { padding: 3rem 1.5rem; }
+    .host-grid { grid-template-columns: 1fr; }
+
+    /* Footer */
+    footer { padding: 3rem 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+    /* Listing detail page */
+    .modal-hero { height: 260px; }
+    .modal-hero-title { font-size: 1.6rem; }
+    .modal-body { padding: 1.5rem; }
+    .modal-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .booking-box { position: static; }
+
+    /* Dashboard */
+    .dashboard-layout { grid-template-columns: 1fr; }
+    .dash-sidebar { display: flex; flex-wrap: wrap; gap: 0; padding: 1rem 0 0; }
+    .dash-user { width: 100%; padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); border-right: none; margin-bottom: 0; }
+    .dash-nav-item { font-size: 0.72rem; padding: 0.7rem 1rem; flex: 1; min-width: auto; text-align: center; border-left: none !important; border-bottom: 2px solid transparent; }
+    .dash-nav-item.active { border-bottom-color: var(--clay) !important; background: rgba(255,255,255,0.07); }
+    .dash-main { padding: 1.5rem; }
+    .dash-cards { grid-template-columns: 1fr 1fr !important; gap: 1rem; }
+
+    /* Tables — horizontal scroll on mobile */
+    .bookings-table { font-size: 0.78rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* About page */
+    .about-grid-2col { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    .about-values-grid { grid-template-columns: 1fr !important; }
+    .about-team-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-logo { font-size: 1.3rem; }
+
+    .hero-left { padding: 2.5rem 1.2rem 1.5rem; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+
+    .listings-section { padding: 1.5rem 1.2rem; }
+    .section-title { font-size: 1.8rem; }
+
+    .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+
+    .dash-cards { grid-template-columns: 1fr !important; }
+    .dash-nav-item { font-size: 0.65rem; padding: 0.6rem 0.5rem; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    .modal-hero-title { font-size: 1.3rem; }
+
+    .featured-details { grid-template-columns: 1fr 1fr; }
+
+    /* About page */
+    .about-team-grid { grid-template-columns: 1fr !important; }
+  }
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo nav-logo-link" onclick="showPage('marketplace')">RAYSUNDO</div>
+  <div class="nav-logo nav-logo-link" onclick="navTo('explore')">RAYSUNDO</div>
   <ul class="nav-links">
     <li><a href="#" id="nav-explore" onclick="navTo('explore'); return false;">Explore</a></li>
     <li><a href="#" id="nav-categories" onclick="navTo('categories'); return false;">Categories</a></li>
@@ -1496,7 +1668,22 @@
     <button class="btn-ghost" onclick="showPage('guest')">Sign In</button>
     <button class="btn-solid" onclick="showPage('guest')">Join Free</button>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="navTo('explore'); closeMobileMenu(); return false;">Explore</a>
+  <a href="#" onclick="navTo('categories'); closeMobileMenu(); return false;">Categories</a>
+  <a href="#" onclick="navTo('host'); closeMobileMenu(); return false;">Host a Retreat</a>
+  <a href="#" onclick="navTo('about'); closeMobileMenu(); return false;">About</a>
+  <div class="mobile-menu-actions">
+    <button class="btn-ghost" onclick="showPage('guest'); closeMobileMenu()">Sign In</button>
+    <button class="btn-solid" onclick="showPage('guest'); closeMobileMenu()">Join Free</button>
+  </div>
+</div>
 
 <!-- PAGE TABS -->
 <div class="page-tabs" style="padding-top: 4.5rem;">
@@ -2288,7 +2475,7 @@
 
   <!-- MISSION -->
   <div style="max-width:900px;margin:0 auto;padding:6rem 4rem;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+    <div class="about-grid-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
       <div>
         <div style="font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:1.2rem;">The Problem</div>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--forest);line-height:1.4;margin-bottom:1.2rem;">Finding a good retreat is harder than it should be.</p>
@@ -2308,7 +2495,7 @@
       <div style="text-align:center;margin-bottom:4rem;">
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--forest);">What we stand for</h2>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;">
+      <div class="about-values-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;">
         <div style="padding:2rem;background:white;border-top:3px solid var(--sage);">
           <div style="font-size:2rem;margin-bottom:1rem;">🔍</div>
           <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--forest);margin-bottom:0.7rem;">Curation over volume</div>
@@ -2333,7 +2520,7 @@
     <div style="text-align:center;margin-bottom:4rem;">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--forest);">The <em style="font-style:italic;color:var(--terracotta);">team</em></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+    <div class="about-team-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
       <div style="text-align:center;">
         <div style="width:5rem;height:5rem;background:linear-gradient(135deg,var(--forest),var(--sage));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.2rem;"></div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--forest);">Mateo Raya</div>
@@ -2409,6 +2596,20 @@
 </footer>
 
 <script>
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   // ── nav routing ──
   // Maps nav link id → what happens
   const NAV_ACTIONS = {
